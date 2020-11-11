@@ -3,7 +3,13 @@ cmake_minimum_required(VERSION 2.8.7)
 # VelodyneHDL Driver
 project(VelodyneHDL)
 
+find_package(Boost REQUIRED COMPONENTS system thread)
+
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
+message(${Boost_LIBRARY_DIRS})
 
 add_library(PacketDriver SHARED PacketDriver.cpp)
 target_link_libraries(PacketDriver
@@ -57,6 +63,6 @@ target_link_libraries(test_PacketBundleDecoder
 add_executable(PacketFileSender PacketFileSender.cxx)
 target_link_libraries(PacketFileSender
   boost_system
-  boost_thread
+  boost_thread-mt
   pcap
 )
