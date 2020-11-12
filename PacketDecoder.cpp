@@ -2,6 +2,7 @@
 // Nick Rypkema (rypkema@mit.edu), MIT 2017
 // shared library to decode a Velodyne packet - largely repurposed from vtkVelodyneHDLReader
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include <stdint.h>
 #include <iostream>

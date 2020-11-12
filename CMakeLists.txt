@@ -5,15 +5,17 @@ project(VelodyneHDL)
 
 find_package(Boost REQUIRED COMPONENTS system thread)
 
+set(WINPCAPS_ROOT "C:/Program Files/WpdPack")
+include_directories(${WINPCAPS_ROOT}/include)
+link_directories(${WINPCAPS_ROOT}/lib/x64)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
-message(${Boost_LIBRARY_DIRS})
 
 add_library(PacketDriver SHARED PacketDriver.cpp)
 target_link_libraries(PacketDriver
-  boost_system
+  ${Boost_SYSTEM_LIBRARY}
 )
 
 add_library(PacketDecoder SHARED PacketDecoder.cpp)
@@ -31,20 +33,20 @@ target_link_libraries(PacketBundleDecoder
 add_executable(test_PacketDriver tests/test_PacketDriver.cpp)
 target_link_libraries(test_PacketDriver
   PacketDriver
-  pcap
+  ${Boost_SYSTEM_LIBRARY}
 )
 
 add_executable(test_PacketDecoder tests/test_PacketDecoder.cpp)
 target_link_libraries(test_PacketDecoder
   PacketDriver
   PacketDecoder
-  pcap
+  wpcap
 )
 
 add_executable(test_PacketWriter tests/test_PacketWriter.cpp)
 target_link_libraries(test_PacketWriter
   PacketDriver
-  pcap
+  wpcap
 )
 
 add_executable(test_PacketBundler tests/test_PacketBundler.cpp)
@@ -62,7 +64,7 @@ target_link_libraries(test_PacketBundleDecoder
 
 add_executable(PacketFileSender PacketFileSender.cxx)
 target_link_libraries(PacketFileSender
-  boost_system
-  boost_thread-mt
-  pcap
+  ${Boost_SYSTEM_LIBRARY}
+  ${Boost_THREAD_LIBRARY}
+  wpcap
 )

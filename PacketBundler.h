@@ -5,11 +5,27 @@
 #ifndef PACKET_BUNDLER_H_INCLUDED
 #define PACKET_BUNDLER_H_INCLUDED
 
+
+#ifdef WIN32
+
+#ifdef PacketBundler_EXPORTS
+#define VELO_API __declspec(dllexport)
+#else
+#define VELO_API __declspec(dllimport)
+#endif
+
+#else
+
+#define VELO_API 
+
+#endif
+
+
 #include <string>
 #include <deque>
 #include "PacketDecoder.h"
 
-class PacketBundler
+VELO_API class PacketBundler
 {
 public:
   PacketBundler();

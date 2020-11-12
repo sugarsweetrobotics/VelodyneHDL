@@ -5,6 +5,20 @@
 #ifndef PACKET_DECODER_H_INCLUDED
 #define PACKET_DECODER_H_INCLUDED
 
+#ifdef WIN32
+
+#ifdef PacketDecoder_EXPORTS
+#define VELO_API __declspec(dllexport)
+#else
+#define VELO_API __declspec(dllimport)
+#endif
+
+#else
+
+#define VELO_API 
+
+#endif
+
 #include <string>
 #include <vector>
 #include <deque>
@@ -72,7 +86,7 @@ double *sin_lookup_table_;
 HDLLaserCorrection laser_corrections_[HDL_MAX_NUM_LASERS];
 }
 
-class PacketDecoder
+class VELO_API PacketDecoder
 {
 public:
   struct HDLFrame

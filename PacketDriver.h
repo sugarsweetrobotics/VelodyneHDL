@@ -5,11 +5,28 @@
 #ifndef PACKET_DRIVER_H_INCLUDED
 #define PACKET_DRIVER_H_INCLUDED
 
+
+#ifdef WIN32
+
+#ifdef PacketDriver_EXPORTS
+#define VELO_API __declspec(dllexport)
+#else
+#define VELO_API __declspec(dllimport)
+#endif
+
+#else
+
+#define VELO_API 
+
+#endif
+
+
 #include <boost/asio.hpp>
 
 static unsigned int DATA_PORT = 2368;
 
-class PacketDriver
+class
+VELO_API PacketDriver
 {
 public:
   PacketDriver();
