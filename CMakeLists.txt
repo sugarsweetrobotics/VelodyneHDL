@@ -5,9 +5,14 @@ project(VelodyneHDL)
 
 find_package(Boost REQUIRED COMPONENTS system thread)
 
+if(WIN32)
 set(WINPCAPS_ROOT "C:/Program Files/WpdPack")
 include_directories(${WINPCAPS_ROOT}/include)
 link_directories(${WINPCAPS_ROOT}/lib/x64)
+set(PCAP_LIB wpcap)
+else(WIN32)
+set(PCAP_LIB pcap)
+endif(WIN32)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
@@ -40,13 +45,13 @@ add_executable(test_PacketDecoder tests/test_PacketDecoder.cpp)
 target_link_libraries(test_PacketDecoder
   PacketDriver
   PacketDecoder
-  wpcap
+  ${PCAP_LIB}
 )
 
 add_executable(test_PacketWriter tests/test_PacketWriter.cpp)
 target_link_libraries(test_PacketWriter
   PacketDriver
-  wpcap
+  ${PCAP_LIB}
 )
 
 add_executable(test_PacketBundler tests/test_PacketBundler.cpp)
@@ -66,5 +71,5 @@ add_executable(PacketFileSender PacketFileSender.cxx)
 target_link_libraries(PacketFileSender
   ${Boost_SYSTEM_LIBRARY}
   ${Boost_THREAD_LIBRARY}
-  wpcap
+  ${PCAP_LIB}
 )

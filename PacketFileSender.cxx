@@ -108,10 +108,10 @@ int main(int argc, char* argv[])
         HDLDataPacket* dataPacket = reinterpret_cast<HDLDataPacket *>(data2);
         packetTime = (dataPacket->gpsTimestamp*1e-6);
 
-        auto n = std::chrono::system_clock::now();
+	std::chrono::time_point<std::chrono::system_clock> n = std::chrono::system_clock::now();
         long long timestamp_s = std::chrono::time_point_cast<std::chrono::seconds>(n).time_since_epoch().count();
         long long timestamp   = std::chrono::time_point_cast<std::chrono::nanoseconds>(n).time_since_epoch().count();
-#ifndef WIN32
+#if 0
         timespec tp;
         clock_gettime(CLOCK_REALTIME,&tp);
         long long timestamp_s = (tp).tv_sec*1e9;
