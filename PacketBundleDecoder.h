@@ -8,14 +8,14 @@
 #ifdef WIN32
 
 #ifdef PacketBundleDecoder_EXPORTS
-#define VELO_API __declspec(dllexport)
+#define VELO_BUNDLE_DECODER_API __declspec(dllexport)
 #else
-#define VELO_API __declspec(dllimport)
+#define VELO_BUNDLE_DECODER_API __declspec(dllimport)
 #endif
 
 #else
 
-#define VELO_API 
+#define VELO_BUNDLE_DECODER_API 
 
 #endif
 
@@ -24,7 +24,7 @@
 #include <deque>
 #include "PacketDecoder.h"
 
-VELO_API class PacketBundleDecoder
+class VELO_BUNDLE_DECODER_API PacketBundleDecoder
 {
 public:
   struct HDLFrame

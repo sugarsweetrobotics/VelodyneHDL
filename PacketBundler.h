@@ -9,14 +9,14 @@
 #ifdef WIN32
 
 #ifdef PacketBundler_EXPORTS
-#define VELO_API __declspec(dllexport)
+#define VELO_BUNDLER__API __declspec(dllexport)
 #else
-#define VELO_API __declspec(dllimport)
+#define VELO_BUNDLER__API __declspec(dllimport)
 #endif
 
 #else
 
-#define VELO_API 
+#define VELO_BUNDLER_API 
 
 #endif
 
@@ -25,7 +25,7 @@
 #include <deque>
 #include "PacketDecoder.h"
 
-VELO_API class PacketBundler
+class VELO_BUNDLER__API PacketBundler
 {
 public:
   PacketBundler();

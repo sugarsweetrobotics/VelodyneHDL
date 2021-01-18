@@ -6,7 +6,7 @@ project(VelodyneHDL)
 find_package(Boost REQUIRED COMPONENTS system thread)
 
 if(WIN32)
-set(WINPCAPS_ROOT "C:/Program Files/WpdPack")
+set(WINPCAPS_ROOT "${PROJECT_SOURCE_DIR}/../winpcap")
 include_directories(${WINPCAPS_ROOT}/include)
 link_directories(${WINPCAPS_ROOT}/lib/x64)
 set(PCAP_LIB wpcap)
@@ -16,6 +16,8 @@ endif(WIN32)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIR}/..)
 link_directories(${Boost_LIBRARY_DIRS})
 
 add_library(PacketDriver SHARED PacketDriver.cpp)
